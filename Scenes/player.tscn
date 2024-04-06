@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bfh7echkt62a6"]
+[gd_scene load_steps=19 format=3 uid="uid://bfh7echkt62a6"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_7i56h"]
 [ext_resource type="Texture2D" uid="uid://qg7x8aednjnp" path="res://Assets/Animations/Player/player_back1.png" id="1_d0iki"]
@@ -7,7 +7,10 @@
 [ext_resource type="Texture2D" uid="uid://b23ahchcluarx" path="res://Assets/Animations/Player/player_back4.png" id="4_sgs44"]
 [ext_resource type="Texture2D" uid="uid://ba0yrjv31qqbn" path="res://Assets/Animations/Player/player_front1.png" id="5_eesyk"]
 [ext_resource type="Texture2D" uid="uid://b8uhy5ybdexll" path="res://Assets/Animations/Player/player_front2.png" id="6_gtfus"]
+[ext_resource type="Texture2D" uid="uid://b0whh7o1oon00" path="res://Assets/Animations/Player/player_dead1.png" id="6_sll85"]
+[ext_resource type="Texture2D" uid="uid://beb525dd17yns" path="res://Assets/Animations/Player/player_dead2.png" id="7_fs50g"]
 [ext_resource type="Texture2D" uid="uid://bodpffbe8nl8c" path="res://Assets/Animations/Player/player_front3.png" id="7_p827j"]
+[ext_resource type="Texture2D" uid="uid://dcys3f1rubl06" path="res://Assets/Animations/Player/player_dead3.png" id="8_gxlvo"]
 [ext_resource type="Texture2D" uid="uid://c1wq65n2mnn0e" path="res://Assets/Animations/Player/player_front4.png" id="8_jkiss"]
 [ext_resource type="Texture2D" uid="uid://wsfhky8msewh" path="res://Assets/Animations/Player/player_side1.png" id="9_1ls0o"]
 [ext_resource type="Texture2D" uid="uid://dkvu671t2241n" path="res://Assets/Animations/Player/player_side2.png" id="10_sbjmo"]
@@ -35,6 +38,20 @@ animations = [{
 "loop": true,
 "name": &"back",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_sll85")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_fs50g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_gxlvo")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 2.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -72,6 +89,8 @@ animations = [{
 }]
 
 [node name="Player" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 11
 script = ExtResource("1_7i56h")
 
 [node name="Collider" type="CollisionShape2D" parent="."]
@@ -81,9 +100,8 @@ shape = SubResource("RectangleShape2D_kkq0q")
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_j4xth")
-animation = &"side"
-frame = 2
-frame_progress = 0.265691
+animation = &"dead"
+frame_progress = 0.0828461
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)
