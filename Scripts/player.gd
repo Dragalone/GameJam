@@ -2,8 +2,10 @@ extends CharacterBody2D
 
 class_name Player
 
-@export var speed: float = 100.0
+signal game_over
 
+@export var speed: float = 100.0
+@export var max_fill: int = 100
 @export var Bullet  : PackedScene
 
 
@@ -11,10 +13,19 @@ class_name Player
 @onready var sprite: AnimatedSprite2D = $Sprite as AnimatedSprite2D
 @onready var delay_timer: Timer = $Timer
 
-
+@onready var disk_fill_bar: DiskFillPanel = $"../UI/DiskFillPanel"
 var input_vector: Vector2 = Vector2.ZERO
 
-var canMove: bool = true
+var canMove: bool = true: set = _setCanMove
+var gameOver: bool = false
+
+func fill_disk_space(size):
+	disk_fill_bar.fill += size
+
+func _setCanMove(newCanMove):
+	if !newCanMove:
+		sprite.stop()
+	canMove = newCanMove
 
 var side_right_marker_pos = Vector2(15,0)
 var side_left_marker_pos = Vector2(-15,0)
@@ -32,8 +43,7 @@ func _physics_process(_delta: float) -> void:
 		shoot()
 		delay_timer.start()	
 	
-	if !canMove:
-		sprite.stop()
+	if gameOver or !canMove:
 		return
 	if input_vector.length() > 0:
 		velocity = input_vector * speed
@@ -45,7 +55,6 @@ func _physics_process(_delta: float) -> void:
 		sprite.stop()
 	
 	move_and_slide()
-	print(position)
 	var mouse_pos = get_viewport().get_mouse_position()
 	
 	mouse_pos.x -= get_viewport().get_visible_rect().size.x/2
@@ -80,3 +89,12 @@ func shoot():
 	mouse_pos.x -= get_viewport().get_visible_rect().size.x/2
 	mouse_pos.y -= get_viewport().get_visible_rect().size.y/2
 	b.rotation_degrees = mouse_pos.angle() * 180 / PI
+
+
+func _on_disk_fill_panel_filled_up():
+	if gameOver:
+		return
+	canMove = false
+	gameOver = true
+	sprite.play()
+	sprite.animation = "dead"

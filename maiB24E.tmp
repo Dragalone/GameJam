@@ -2,8 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bfh7echkt62a6" path="res://Scenes/player.tscn" id="1_7sms1"]
 [ext_resource type="PackedScene" uid="uid://b2br7o6drqxo" path="res://Scenes/enemy.tscn" id="2_7ov0x"]
-[ext_resource type="PackedScene" uid="uid://d0300ah3ibtgk" path="res://Scenes/bullet.tscn" id="3_d7t7a"]
-[ext_resource type="PackedScene" uid="uid://bsp06ut5suvcx" path="res://Scenes/health_panel.tscn" id="3_el0hv"]
+[ext_resource type="PackedScene" uid="uid://1mehogegj1w6" path="res://Scenes/health_panel.tscn" id="3_el0hv"]
 
 [node name="Main" type="Node2D"]
 
@@ -11,10 +10,7 @@
 position = Vector2(144, 40)
 
 [node name="Player" parent="." instance=ExtResource("1_7sms1")]
-Bullet = ExtResource("3_d7t7a")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="DiskFillPanel" parent="UI" instance=ExtResource("3_el0hv")]
-
-[connection signal="filled_up" from="UI/DiskFillPanel" to="Player" method="_on_disk_fill_panel_filled_up"]
+[node name="HealthPanel" parent="UI" instance=ExtResource("3_el0hv")]
