@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Enemy
 
 var speed: float = 50
 var player: Player = null

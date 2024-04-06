@@ -42,7 +42,7 @@ size = Vector2(40, 24)
 
 [node name="Enemy" type="CharacterBody2D"]
 collision_layer = 2
-collision_mask = 3
+collision_mask = 19
 script = ExtResource("1_btvu8")
 
 [node name="Collider" type="CollisionShape2D" parent="."]
