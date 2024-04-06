@@ -90,7 +90,7 @@ animations = [{
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 4
-collision_mask = 11
+collision_mask = 9
 script = ExtResource("1_7i56h")
 
 [node name="Collider" type="CollisionShape2D" parent="."]
@@ -101,7 +101,7 @@ shape = SubResource("RectangleShape2D_kkq0q")
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_j4xth")
 animation = &"dead"
-frame_progress = 0.0828461
+frame_progress = 0.0237204
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)

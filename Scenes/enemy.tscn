@@ -53,7 +53,7 @@ shape = SubResource("RectangleShape2D_r3ohp")
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_iswhf")
 animation = &"move"
-frame_progress = 0.519717
+frame_progress = 0.0155644
 
 [node name="DetectionArea" type="Area2D" parent="."]
 collision_layer = 2

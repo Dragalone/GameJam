@@ -3,7 +3,7 @@ extends CharacterBody2D
 class_name Player
 
 @export var speed: float = 100.0
-
+@export var max_fill: int = 100
 @onready var sprite: AnimatedSprite2D = $Sprite as AnimatedSprite2D
 
 var input_vector: Vector2 = Vector2.ZERO
@@ -29,7 +29,6 @@ func _physics_process(_delta: float) -> void:
 		sprite.stop()
 	
 	move_and_slide()
-	print(position)
 	if velocity.x != 0:
 		sprite.flip_h = velocity.x < 0
 		sprite.animation = "side"

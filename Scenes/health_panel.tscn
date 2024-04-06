@@ -1,0 +1,91 @@
+[gd_scene load_steps=4 format=3 uid="uid://1mehogegj1w6"]
+
+[ext_resource type="Script" path="res://Scripts/health_panel.gd" id="1_fwems"]
+[ext_resource type="Texture2D" uid="uid://coxkq7upqj1om" path="res://Assets/Static/UI/health_bar_outline.png" id="2_8ekqr"]
+[ext_resource type="Texture2D" uid="uid://cupxaj7q315w1" path="res://Assets/Static/UI/health_bar_fill.png" id="3_lwh3s"]
+
+[node name="HealthPanel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1188.0
+offset_bottom = -830.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fwems")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 304.0
+offset_bottom = 45.0
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="VBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(500, 40)
+layout_mode = 2
+value = 60.0
+nine_patch_stretch = true
+stretch_margin_left = 4
+stretch_margin_top = 1
+stretch_margin_right = 4
+stretch_margin_bottom = 1
+texture_over = ExtResource("2_8ekqr")
+texture_progress = ExtResource("3_lwh3s")
+tint_progress = Color(0.784314, 0, 0.0705882, 1)
+metadata/_edit_group_ = true
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="VBoxContainer/TextureProgressBar"]
+z_index = -1
+custom_minimum_size = Vector2(500, 40)
+layout_mode = 0
+offset_right = 500.0
+offset_bottom = 30.0
+value = 70.0
+nine_patch_stretch = true
+stretch_margin_left = 4
+stretch_margin_top = 1
+stretch_margin_right = 4
+stretch_margin_bottom = 1
+texture_progress = ExtResource("3_lwh3s")
+
+[node name="DamageShowTimer" type="Timer" parent="VBoxContainer/TextureProgressBar"]
+wait_time = 0.4
+one_shot = true
+
+[node name="HBoxContainer" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(500, 30)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="Disk" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -11.0
+offset_right = 86.0
+offset_bottom = 11.0
+grow_vertical = 2
+size_flags_horizontal = 0
+text = "Disk C:\\"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -214.0
+offset_top = -20.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="CurrentGB" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "0 ГБ "
+
+[connection signal="timeout" from="VBoxContainer/TextureProgressBar/DamageShowTimer" to="." method="_on_damage_show_timer_timeout"]
