@@ -13,7 +13,6 @@ func _physics_process(delta):
 		position += (player.position - position) / speed
 		move_and_slide()
 		sprite.flip_h = player.position.x - position.x > 0
-	
 
 func _on_detection_area_body_entered(body):
 	if body is Player:
