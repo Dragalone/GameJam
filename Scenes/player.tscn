@@ -49,7 +49,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("8_gxlvo")
 }],
-"loop": true,
+"loop": false,
 "name": &"dead",
 "speed": 2.0
 }, {
@@ -101,7 +101,6 @@ shape = SubResource("RectangleShape2D_kkq0q")
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_j4xth")
 animation = &"dead"
-frame_progress = 0.0237204
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)

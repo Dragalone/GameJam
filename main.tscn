@@ -13,4 +13,6 @@ position = Vector2(144, 40)
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="HealthPanel" parent="UI" instance=ExtResource("3_el0hv")]
+[node name="DiskFillPanel" parent="UI" instance=ExtResource("3_el0hv")]
+
+[connection signal="filled_up" from="UI/DiskFillPanel" to="Player" method="_on_disk_fill_panel_filled_up"]
