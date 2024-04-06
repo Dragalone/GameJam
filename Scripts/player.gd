@@ -13,7 +13,8 @@ var canMove: bool = true
 func _unhandled_input(_event):
 	var x_axis: float = Input.get_axis("move_left", "move_right")
 	var y_axis: float = Input.get_axis("move_up", "move_down")
-	input_vector = (x_axis * Vector2.RIGHT + y_axis * Vector2.DOWN).normalized()
+	input_vector = (x_axis * Vector2.RIGHT + y_axis * Vector2.DOWN).normalized() 
+		
 
 func _physics_process(_delta: float) -> void:
 	if !canMove:
@@ -30,11 +31,22 @@ func _physics_process(_delta: float) -> void:
 	
 	move_and_slide()
 	print(position)
-	if velocity.x != 0:
-		sprite.flip_h = velocity.x < 0
-		sprite.animation = "side"
-	elif velocity.y != 0:
-		if velocity.y > 0:
-			sprite.animation = "front"
+	var mouse_pos = get_viewport().get_mouse_position()
+	
+	mouse_pos.x -= get_viewport().get_visible_rect().size.x/2
+	mouse_pos.y -= get_viewport().get_visible_rect().size.y/2
+
+	mouse_pos = mouse_pos.rotated(PI/4)
+	
+	if mouse_pos.x > 0:
+		if mouse_pos.y > 0:
+			sprite.flip_h = false
+			sprite.animation = "side"
 		else:
 			sprite.animation = "back"
+	else:
+		if mouse_pos.y > 0:
+			sprite.animation = "front"
+		else:
+			sprite.flip_h = true
+			sprite.animation = "side"
