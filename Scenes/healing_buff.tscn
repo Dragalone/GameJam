@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://darcxovofbbgo"]
+
+[ext_resource type="Script" path="res://Scripts/buffs/healing_buff.gd" id="1_g2qur"]
+[ext_resource type="Texture2D" uid="uid://bexi6yejleauq" path="res://Assets/Static/Buffs/buff_gb.png" id="1_xxqu7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kg12r"]
+size = Vector2(12, 13.3959)
+
+[node name="HealingBuff" type="Area2D"]
+position = Vector2(8, 7)
+scale = Vector2(1, 0.864)
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("1_g2qur")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -1.15741)
+scale = Vector2(1, 0.864)
+shape = SubResource("RectangleShape2D_kg12r")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-1, -1)
+scale = Vector2(1, 0.864)
+texture = ExtResource("1_xxqu7")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
