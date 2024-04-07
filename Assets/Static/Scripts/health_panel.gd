@@ -16,8 +16,8 @@ var max_fill: int = 0
 func _ready():
 	init_fill(player.max_fill)
 
-func _process(delta):
-	currentGB_text.text = "Свободно "+str(fill)+" ГБ из "+str(max_fill)+" ГБ"
+func _process(_delta):
+	currentGB_text.text = "Свободно "+str(max_fill-fill)+" ГБ из "+str(max_fill)+" ГБ"
 	#if Input.is_action_just_pressed("ui_accept"):
 		#fill += 10
 

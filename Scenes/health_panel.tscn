@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bxio1eb66ij5y"]
 
-[ext_resource type="Script" path="res://Scripts/health_panel.gd" id="1_fwems"]
+[ext_resource type="Script" path="res://Assets/Static/Scripts/health_panel.gd" id="1_fwems"]
 [ext_resource type="Texture2D" uid="uid://coxkq7upqj1om" path="res://Assets/Static/UI/health_bar_outline.png" id="2_8ekqr"]
 [ext_resource type="Texture2D" uid="uid://cupxaj7q315w1" path="res://Assets/Static/UI/health_bar_fill.png" id="3_lwh3s"]
 

@@ -6,7 +6,7 @@ signal game_over
 
 @export var speed: float
 @export var max_fill: int
-@export var Bullet  : PackedScene
+@export var bullet  : PackedScene
 
 @onready var camera: Camera2D = $Camera2D
 @onready var marker: Marker2D = $Marker2D
@@ -44,7 +44,7 @@ func _unhandled_input(_event):
 
 
 func _physics_process(_delta: float) -> void:
-	if delay_timer.is_stopped() && Input.is_action_pressed("shoot"):
+	if delay_timer.is_stopped() && Input.is_action_pressed("shoot") && !gameOver:
 		shoot()
 		delay_timer.start()	
 	
@@ -87,7 +87,7 @@ func _physics_process(_delta: float) -> void:
 			marker.position = side_left_marker_pos
 
 func shoot():
-	var b = Bullet.instantiate()
+	var b = bullet.instantiate()
 	get_tree().root.add_child(b)
 	b.transform = marker.global_transform
 	var mouse_pos = get_viewport().get_mouse_position()

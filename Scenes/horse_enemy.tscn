@@ -1,33 +1,37 @@
-[gd_scene load_steps=10 format=3 uid="uid://b2br7o6drqxo"]
+[gd_scene load_steps=11 format=3 uid="uid://rjpds2008lnb"]
 
-[ext_resource type="Texture2D" uid="uid://erulj8bvsgw3" path="res://Assets/Animations/Enemies/Worm/worm_eat1.png" id="1_pjren"]
-[ext_resource type="Script" path="res://Assets/Static/Scripts/enemy.gd" id="1_rjo2j"]
-[ext_resource type="Texture2D" uid="uid://26f654kll1nx" path="res://Assets/Animations/Enemies/Worm/worm_eat2.png" id="2_qe0hd"]
-[ext_resource type="Texture2D" uid="uid://iyban5i8prar" path="res://Assets/Animations/Enemies/Worm/worm_move1.png" id="3_knhr0"]
-[ext_resource type="Texture2D" uid="uid://u4ukk8mixu01" path="res://Assets/Animations/Enemies/Worm/worm_move2.png" id="4_rwenr"]
+[ext_resource type="Script" path="res://horse_enemy.gd" id="1_6kuk2"]
+[ext_resource type="Texture2D" uid="uid://dra3dftbp2s38" path="res://Assets/Animations/Enemies/Horse/horse_attack1.png" id="2_eu3j3"]
+[ext_resource type="Texture2D" uid="uid://bx8drwgmj7u1e" path="res://Assets/Animations/Enemies/Horse/horse_attack2.png" id="3_5xrnw"]
+[ext_resource type="Texture2D" uid="uid://cdc5c5lfcxkfq" path="res://Assets/Animations/Enemies/Horse/horse_attack3.png" id="4_wqqih"]
+[ext_resource type="Texture2D" uid="uid://06ni7jw5r36f" path="res://Assets/Animations/Enemies/Horse/horse_move1.png" id="5_ibug1"]
+[ext_resource type="Texture2D" uid="uid://b5fe2teqpwa20" path="res://Assets/Animations/Enemies/Horse/horse_move2.png" id="6_t65s3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r3ohp"]
-size = Vector2(31, 11)
+size = Vector2(53, 48)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_iswhf"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_pjren")
+"texture": ExtResource("2_eu3j3")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_qe0hd")
+"texture": ExtResource("3_5xrnw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_wqqih")
 }],
 "loop": false,
 "name": &"eat",
-"speed": 3.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_knhr0")
+"texture": ExtResource("5_ibug1")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_rwenr")
+"texture": ExtResource("6_t65s3")
 }],
 "loop": true,
 "name": &"move",
@@ -35,19 +39,19 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_elye3"]
-radius = 947.008
+radius = 528.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1sjgy"]
-size = Vector2(40, 24)
+size = Vector2(82, 69)
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="HorseEnemy" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 17
 platform_on_leave = 2
-script = ExtResource("1_rjo2j")
+script = ExtResource("1_6kuk2")
 
 [node name="Collider" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, 1.5)
+position = Vector2(0.5, 1)
 shape = SubResource("RectangleShape2D_r3ohp")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
@@ -67,7 +71,7 @@ collision_layer = 2
 collision_mask = 4
 
 [node name="AttackAreaShape" type="CollisionShape2D" parent="AttackArea"]
-position = Vector2(0, 1)
+position = Vector2(2, 2.5)
 shape = SubResource("RectangleShape2D_1sjgy")
 
 [node name="DelayAttackTimer" type="Timer" parent="."]
