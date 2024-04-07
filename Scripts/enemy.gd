@@ -1,15 +1,28 @@
 extends CharacterBody2D
 class_name Enemy
 
-var speed: float = 50
+
+var health: int
+var speed: float
 var player: Player = null
+
 var chase = false
 var canDamage: bool = false
 var cooldown: bool = false
 @onready var attackDelay: Timer = $DelayAttackTimer
 @onready var sprite: AnimatedSprite2D = $Sprite
+@onready var damage_numbers_origin = $DamageNumbersOrigin
+
+
+func _ready():
+	health = 120
+	speed = 50
+
 
 func _physics_process(delta):
+	if (health <= 0):
+		queue_free()
+		
 	if chase:
 		position += (player.position - position) / speed
 		move_and_slide()
@@ -35,6 +48,7 @@ func _on_attack_area_body_entered(body):
 		sprite.animation = "eat"
 		canDamage = true
 
+		
 
 func _on_attack_area_body_exited(body):
 	if body is Player:

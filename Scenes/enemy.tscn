@@ -71,6 +71,9 @@ shape = SubResource("RectangleShape2D_1sjgy")
 
 [node name="DelayAttackTimer" type="Timer" parent="."]
 
+[node name="DamageNumbersOrigin" type="Node2D" parent="."]
+position = Vector2(0, -4)
+
 [connection signal="animation_finished" from="Sprite" to="." method="_on_sprite_animation_finished"]
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]

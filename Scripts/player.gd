@@ -4,8 +4,8 @@ class_name Player
 
 signal game_over
 
-@export var speed: float = 100.0
-@export var max_fill: int = 100
+@export var speed: float
+@export var max_fill: int
 @export var Bullet  : PackedScene
 
 
@@ -19,6 +19,11 @@ var input_vector: Vector2 = Vector2.ZERO
 var canMove: bool = true: set = _setCanMove
 var gameOver: bool = false
 
+
+func _ready():
+	speed = 100.0
+	max_fill = 100
+	
 func fill_disk_space(size):
 	disk_fill_bar.fill += size
 

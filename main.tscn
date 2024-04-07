@@ -1,9 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dqdubj100ucy"]
+[gd_scene load_steps=5 format=3 uid="uid://dqdubj100ucy"]
 
 [ext_resource type="PackedScene" uid="uid://bfh7echkt62a6" path="res://Scenes/player.tscn" id="1_7sms1"]
 [ext_resource type="PackedScene" uid="uid://b2br7o6drqxo" path="res://Scenes/enemy.tscn" id="2_7ov0x"]
 [ext_resource type="PackedScene" uid="uid://d0300ah3ibtgk" path="res://Scenes/bullet.tscn" id="3_d7t7a"]
-[ext_resource type="PackedScene" uid="uid://bsp06ut5suvcx" path="res://Scenes/health_panel.tscn" id="3_el0hv"]
+[ext_resource type="PackedScene" uid="uid://bxio1eb66ij5y" path="res://Scenes/health_panel.tscn" id="3_el0hv"]
 
 [node name="Main" type="Node2D"]
 
@@ -16,5 +16,15 @@ Bullet = ExtResource("3_d7t7a")
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="DiskFillPanel" parent="UI" instance=ExtResource("3_el0hv")]
+custom_minimum_size = Vector2(500, 70)
+anchors_preset = -1
+anchor_left = 1.0
+anchor_bottom = 0.0
+offset_left = 0.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 0.0
+grow_horizontal = 0
+grow_vertical = 1
 
 [connection signal="filled_up" from="UI/DiskFillPanel" to="Player" method="_on_disk_fill_panel_filled_up"]
