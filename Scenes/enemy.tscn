@@ -1,40 +1,37 @@
-[gd_scene load_steps=14 format=3 uid="uid://b2br7o6drqxo"]
+[gd_scene load_steps=14 format=3 uid="uid://ofshsdgqvkkj"]
 
-[ext_resource type="Texture2D" uid="uid://erulj8bvsgw3" path="res://Assets/Animations/Enemies/Worm/worm_eat1.png" id="1_pjren"]
-<<<<<<< HEAD
-[ext_resource type="Script" path="res://Assets/Static/Scripts/enemy.gd" id="1_rjo2j"]
-=======
-[ext_resource type="PackedScene" uid="uid://darcxovofbbgo" path="res://Scenes/healing_buff.tscn" id="2_ctyk5"]
->>>>>>> buffs
-[ext_resource type="Texture2D" uid="uid://26f654kll1nx" path="res://Assets/Animations/Enemies/Worm/worm_eat2.png" id="2_qe0hd"]
-[ext_resource type="PackedScene" uid="uid://c4ig045lt1p47" path="res://Scenes/boosting_buff.tscn" id="3_ftmkq"]
-[ext_resource type="Texture2D" uid="uid://iyban5i8prar" path="res://Assets/Animations/Enemies/Worm/worm_move1.png" id="3_knhr0"]
-[ext_resource type="PackedScene" uid="uid://b3d348mleq0ms" path="res://Scenes/damage_buff.tscn" id="4_ku176"]
-[ext_resource type="Texture2D" uid="uid://u4ukk8mixu01" path="res://Assets/Animations/Enemies/Worm/worm_move2.png" id="4_rwenr"]
-[ext_resource type="PackedScene" uid="uid://7itpi66kgl12" path="res://Scenes/triple_shot_buff.tscn" id="5_q72is"]
+[ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_diwb8"]
+[ext_resource type="Texture2D" uid="uid://erulj8bvsgw3" path="res://Assets/Animations/Enemies/Worm/worm_eat1.png" id="2_24qys"]
+[ext_resource type="PackedScene" uid="uid://darcxovofbbgo" path="res://Scenes/healing_buff.tscn" id="2_rr6u2"]
+[ext_resource type="PackedScene" uid="uid://c4ig045lt1p47" path="res://Scenes/boosting_buff.tscn" id="3_gc3wh"]
+[ext_resource type="Texture2D" uid="uid://26f654kll1nx" path="res://Assets/Animations/Enemies/Worm/worm_eat2.png" id="3_wvsdr"]
+[ext_resource type="Texture2D" uid="uid://iyban5i8prar" path="res://Assets/Animations/Enemies/Worm/worm_move1.png" id="4_icwxs"]
+[ext_resource type="PackedScene" uid="uid://b3d348mleq0ms" path="res://Scenes/damage_buff.tscn" id="4_ut5kg"]
+[ext_resource type="PackedScene" uid="uid://7itpi66kgl12" path="res://Scenes/triple_shot_buff.tscn" id="5_s0f3u"]
+[ext_resource type="Texture2D" uid="uid://u4ukk8mixu01" path="res://Assets/Animations/Enemies/Worm/worm_move2.png" id="5_v5hlj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r3ohp"]
-size = Vector2(31, 11)
+size = Vector2(33, 13)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_iswhf"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_pjren")
+"texture": ExtResource("2_24qys")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_qe0hd")
+"texture": ExtResource("3_wvsdr")
 }],
 "loop": false,
 "name": &"eat",
-"speed": 3.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_knhr0")
+"texture": ExtResource("4_icwxs")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_rwenr")
+"texture": ExtResource("5_v5hlj")
 }],
 "loop": true,
 "name": &"move",
@@ -42,25 +39,20 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_elye3"]
-radius = 947.008
+radius = 1646.11
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1sjgy"]
-size = Vector2(40, 24)
+size = Vector2(46, 24)
 
 [node name="Enemy" type="CharacterBody2D"]
 collision_layer = 2
-<<<<<<< HEAD
 collision_mask = 17
 platform_on_leave = 2
-script = ExtResource("1_rjo2j")
-=======
-collision_mask = 19
-script = ExtResource("1_btvu8")
-HealingBuff = ExtResource("2_ctyk5")
-BoostingBuff = ExtResource("3_ftmkq")
-DamageBuff = ExtResource("4_ku176")
-TripleShotBuff = ExtResource("5_q72is")
->>>>>>> buffs
+script = ExtResource("1_diwb8")
+HealingBuff = ExtResource("2_rr6u2")
+BoostingBuff = ExtResource("3_gc3wh")
+DamageBuff = ExtResource("4_ut5kg")
+TripleShotBuff = ExtResource("5_s0f3u")
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 1.5)
@@ -69,7 +61,7 @@ shape = SubResource("RectangleShape2D_r3ohp")
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_iswhf")
-animation = &"eat"
+animation = &"move"
 
 [node name="DetectionArea" type="Area2D" parent="."]
 collision_layer = 2
@@ -83,7 +75,7 @@ collision_layer = 2
 collision_mask = 4
 
 [node name="AttackAreaShape" type="CollisionShape2D" parent="AttackArea"]
-position = Vector2(0, 1)
+position = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_1sjgy")
 
 [node name="DelayAttackTimer" type="Timer" parent="."]

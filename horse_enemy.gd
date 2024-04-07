@@ -14,6 +14,7 @@ func _ready():
 
 func _physics_process(_delta):
 	if (health <= 0):
+		random_buff_spawn()
 		for i in range(enemies_to_spawn):
 			var enemy: Enemy = enemyToSpawn.instantiate()
 			enemy.position = position + Vector2(randf_range(0,10), randf_range(0,10))

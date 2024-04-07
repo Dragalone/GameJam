@@ -1,6 +1,11 @@
 extends CharacterBody2D
+
 class_name Enemy
 
+@export var HealingBuff  : PackedScene
+@export var BoostingBuff  : PackedScene
+@export var DamageBuff  : PackedScene
+@export var TripleShotBuff  : PackedScene
 
 var health: int
 var speed: float
@@ -29,6 +34,7 @@ func _ready():
 func _physics_process(_delta):
 	if (health <= 0):
 		enemy_changed.emit(-1)
+		random_buff_spawn()
 		queue_free()
 		
 	if chase:
@@ -40,6 +46,27 @@ func _physics_process(_delta):
 		#position += (player.position - position).normalized() * speed
 		move_and_slide()
 		sprite.flip_h = player.position.x - position.x > 0
+
+func random_buff_spawn():
+	if (randi_range(0, 100) <= 15):
+			var buff_type = randi_range(0,3)
+			match  buff_type:
+				0: 
+					var healling_buff = HealingBuff.instantiate()
+					get_tree().root.add_child(healling_buff)
+					healling_buff.global_position = global_position
+				1:
+					var boosting_buff = BoostingBuff.instantiate()
+					get_tree().root.add_child(boosting_buff)
+					boosting_buff.global_position = global_position
+				2:
+					var damage_buff = DamageBuff.instantiate()
+					get_tree().root.add_child(damage_buff)
+					damage_buff.global_position = global_position
+				3:
+					var triple_shot_buff = TripleShotBuff.instantiate()
+					get_tree().root.add_child(triple_shot_buff)
+					triple_shot_buff.global_position = global_position
 
 func _on_detection_area_body_entered(body):
 	if body is Player:

@@ -1,16 +1,20 @@
-[gd_scene load_steps=15 format=3 uid="uid://dqdubj100ucy"]
+[gd_scene load_steps=19 format=3 uid="uid://dqdubj100ucy"]
 
 [ext_resource type="PackedScene" uid="uid://bfh7echkt62a6" path="res://Scenes/player.tscn" id="1_7sms1"]
 [ext_resource type="Script" path="res://main.gd" id="1_fmrb0"]
 [ext_resource type="Texture2D" uid="uid://qcdkollili33" path="res://Assets/Static/tilemap.png" id="1_ki731"]
 [ext_resource type="Texture2D" uid="uid://cdtamdp0pd07t" path="res://Assets/Static/bg.png" id="2_6f172"]
-[ext_resource type="PackedScene" uid="uid://b2br7o6drqxo" path="res://Scenes/enemy.tscn" id="2_7ov0x"]
+[ext_resource type="PackedScene" uid="uid://ofshsdgqvkkj" path="res://Scenes/enemy.tscn" id="2_7ov0x"]
 [ext_resource type="PackedScene" uid="uid://d0300ah3ibtgk" path="res://Scenes/bullet.tscn" id="3_d7t7a"]
 [ext_resource type="PackedScene" uid="uid://bxio1eb66ij5y" path="res://Scenes/health_panel.tscn" id="3_el0hv"]
 [ext_resource type="Script" path="res://EnemyManager.gd" id="3_p7ikd"]
 [ext_resource type="Script" path="res://WavePanel.gd" id="7_ho1ri"]
 [ext_resource type="Script" path="res://WaveManager.gd" id="8_8om7t"]
 [ext_resource type="PackedScene" uid="uid://rjpds2008lnb" path="res://Scenes/horse_enemy.tscn" id="9_2ysuq"]
+[ext_resource type="AudioStream" uid="uid://dgbmw4dn0bnpy" path="res://Assets/Sounds/shoot.mp3" id="12_3vpov"]
+[ext_resource type="Texture2D" uid="uid://boxwjwmimue8x" path="res://Assets/Static/Buffs/buff_dmg.png" id="12_04ccp"]
+[ext_resource type="Texture2D" uid="uid://d3rt76vy54j8w" path="res://Assets/Static/Buffs/buff_fire_rate.png" id="13_621g4"]
+[ext_resource type="Texture2D" uid="uid://cqd2ey88yxaf1" path="res://Assets/Static/Buffs/buff_triple_shot.png" id="15_60onv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ltdmw"]
 texture = ExtResource("1_ki731")
@@ -167,7 +171,59 @@ navigation_polygon = SubResource("NavigationPolygon_25k5f")
 [node name="EnemyManager" type="Node" parent="."]
 script = ExtResource("3_p7ikd")
 
+[node name="Spawn Points" type="Node" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="Spawn Points"]
+position = Vector2(-915, 307)
+
+[node name="Marker2D2" type="Marker2D" parent="Spawn Points"]
+position = Vector2(-891, 999)
+
+[node name="Marker2D3" type="Marker2D" parent="Spawn Points"]
+position = Vector2(-454, 994)
+
+[node name="Marker2D4" type="Marker2D" parent="Spawn Points"]
+position = Vector2(472, 321)
+
+[node name="Marker2D5" type="Marker2D" parent="Spawn Points"]
+position = Vector2(-599, 312)
+
+[node name="Marker2D6" type="Marker2D" parent="Spawn Points"]
+position = Vector2(-879, 616)
+
+[node name="Marker2D7" type="Marker2D" parent="Spawn Points"]
+position = Vector2(422, 952)
+
+[node name="Marker2D8" type="Marker2D" parent="Spawn Points"]
+position = Vector2(53, 314)
+
+[node name="Marker2D9" type="Marker2D" parent="Spawn Points"]
+position = Vector2(-25, 540)
+
+[node name="WaveManager" type="Node" parent="." node_paths=PackedStringArray("spawn_points")]
+script = ExtResource("8_8om7t")
+enemy_list = Array[PackedScene]([ExtResource("2_7ov0x"), ExtResource("9_2ysuq")])
+spawn_rate = Array[float]([0.2, 0.8])
+spawn_points = [NodePath("../Spawn Points/Marker2D"), NodePath("../Spawn Points/Marker2D2"), NodePath("../Spawn Points/Marker2D3"), NodePath("../Spawn Points/Marker2D4"), NodePath("../Spawn Points/Marker2D5"), NodePath("../Spawn Points/Marker2D6"), NodePath("../Spawn Points/Marker2D7"), NodePath("../Spawn Points/Marker2D8"), NodePath("../Spawn Points/Marker2D9")]
+
+[node name="WaveTimeout" type="Timer" parent="WaveManager"]
+one_shot = true
+
+[node name="WaveCountdown" type="Timer" parent="WaveManager"]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+visible = false
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(800, 600)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture_filter = 1
+texture = ExtResource("2_6f172")
+centered = false
+
 [node name="Player" parent="." instance=ExtResource("1_7sms1")]
+z_index = 1
 position = Vector2(-342, 466)
 bullet = ExtResource("3_d7t7a")
 
@@ -229,23 +285,58 @@ text = "Волна: 0
 layout_mode = 2
 text = "Врагов осталось: 0"
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+[node name="DisplayBuffs" type="Control" parent="UI"]
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
 
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_mirroring = Vector2(800, 600)
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/DisplayBuffs"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -11.0
+offset_top = 15.0
+offset_right = 276.0
+offset_bottom = 76.0
+grow_horizontal = 2
+theme_override_constants/separation = 16
 
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+[node name="DamageBuffDisplay" type="TextureRect" parent="UI/DisplayBuffs/HBoxContainer"]
+visible = false
 texture_filter = 1
-texture = ExtResource("2_6f172")
-centered = false
+layout_mode = 2
+texture = ExtResource("12_04ccp")
+expand_mode = 2
 
-[node name="Enemy2" parent="." instance=ExtResource("2_7ov0x")]
-position = Vector2(-187, 405)
+[node name="FireRateDisplay" type="TextureRect" parent="UI/DisplayBuffs/HBoxContainer"]
+visible = false
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("13_621g4")
+expand_mode = 2
 
-[connection signal="filled_up" from="UI/DiskFillPanel" to="Player" method="_on_disk_fill_panel_filled_up"]
+[node name="TripleShotDisplay" type="TextureRect" parent="UI/DisplayBuffs/HBoxContainer"]
+visible = false
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("15_60onv")
+expand_mode = 2
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="Shoot" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("12_3vpov")
+volume_db = -20.0
+
+[connection signal="enemy_changed" from="EnemyManager" to="WaveManager" method="change_enemy"]
 [connection signal="enemiesLeftSet" from="WaveManager" to="UI/WavePanel" method="_on_wave_manager_enemies_left_set"]
 [connection signal="timeoutSet" from="WaveManager" to="UI/WavePanel" method="_on_wave_manager_timeout_set"]
 [connection signal="waveChanged" from="WaveManager" to="UI/WavePanel" method="_on_wave_manager_wave_changed"]
-[connection signal="timeout" from="WaveManager/WaveTimeout" to="UI/WavePanel" method="_on_wave_timeout_timeout"]
 [connection signal="timeout" from="WaveManager/WaveTimeout" to="WaveManager" method="_on_wave_timeout_timeout"]
+[connection signal="timeout" from="WaveManager/WaveTimeout" to="UI/WavePanel" method="_on_wave_timeout_timeout"]
 [connection signal="timeout" from="WaveManager/WaveCountdown" to="UI/WavePanel" method="_on_wave_countdown_timeout"]
+[connection signal="filled_up" from="UI/DiskFillPanel" to="Player" method="_on_disk_fill_panel_filled_up"]

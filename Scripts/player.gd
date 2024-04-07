@@ -10,7 +10,7 @@ signal game_over
 
 @onready var camera: Camera2D = $Camera2D
 @onready var marker: Marker2D = $Marker2D
-@onready var sprite: AnimatedSprite2D = $Sprite as AnimatedSprite2D
+@onready var sprite: AnimatedSprite2D = $Sprite
 
 @onready var delay_timer: Timer = $Timer
 @onready var boosting_timer: Timer = $BoostingTimer
@@ -64,18 +64,14 @@ func _unhandled_input(_event):
 
 
 func _physics_process(_delta: float) -> void:
-<<<<<<< HEAD:Assets/Static/Scripts/player.gd
+
+
 	if delay_timer.is_stopped() && Input.is_action_pressed("shoot") && !gameOver:
-		shoot()
-=======
-
-
-	if delay_timer.is_stopped() && Input.is_action_pressed("shoot"):
+		$"../Sounds/Shoot".play()
 		if (is_triple_shot_active):
 			triple_shoot()
 		else:
 			shoot()
->>>>>>> buffs:Scripts/player.gd
 		delay_timer.start()	
 	
 	if gameOver or !canMove:
@@ -130,7 +126,7 @@ func triple_shoot():
 	var bullets_count = 3
 	var init_degree:float = 120 / bullets_count
 	for i in bullets_count:
-		var b = Bullet.instantiate()
+		var b = bullet.instantiate()
 		get_tree().root.add_child(b)
 		b.transform = marker.global_transform
 		b.damage = damage
