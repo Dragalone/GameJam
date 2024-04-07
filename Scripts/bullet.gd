@@ -11,7 +11,7 @@ var crit_chance: float
 func _ready():
 	damage = 20
 	speed = 750
-	crit_chance = 0.5
+	crit_chance = 0.2
 	timer.start()
 	
 func _physics_process(delta):

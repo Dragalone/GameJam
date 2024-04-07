@@ -1,9 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://dqdubj100ucy"]
+[gd_scene load_steps=9 format=3 uid="uid://dqdubj100ucy"]
 
 [ext_resource type="PackedScene" uid="uid://bfh7echkt62a6" path="res://Scenes/player.tscn" id="1_7sms1"]
 [ext_resource type="Script" path="res://main.gd" id="1_fmrb0"]
 [ext_resource type="Texture2D" uid="uid://qcdkollili33" path="res://Assets/Static/tilemap.png" id="1_ki731"]
-[ext_resource type="Texture2D" uid="uid://cdtamdp0pd07t" path="res://Assets/Static/bg.png" id="2_6f172"]
 [ext_resource type="PackedScene" uid="uid://b2br7o6drqxo" path="res://Scenes/enemy.tscn" id="2_7ov0x"]
 [ext_resource type="PackedScene" uid="uid://d0300ah3ibtgk" path="res://Scenes/bullet.tscn" id="3_d7t7a"]
 [ext_resource type="PackedScene" uid="uid://bxio1eb66ij5y" path="res://Scenes/health_panel.tscn" id="3_el0hv"]
@@ -182,15 +181,5 @@ position = Vector2(-1008, 177)
 
 [node name="BottomRight" type="Marker2D" parent="CameraLimits"]
 position = Vector2(656, 1152)
-
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_mirroring = Vector2(800, 600)
-
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
-texture_filter = 1
-texture = ExtResource("2_6f172")
-centered = false
 
 [connection signal="filled_up" from="UI/DiskFillPanel" to="Player" method="_on_disk_fill_panel_filled_up"]

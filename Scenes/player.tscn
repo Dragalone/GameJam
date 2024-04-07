@@ -102,9 +102,6 @@ texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_j4xth")
 animation = &"front"
 
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(4, 4)
-
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(-6, 11)
 

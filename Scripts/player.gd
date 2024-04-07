@@ -8,7 +8,7 @@ signal game_over
 @export var max_fill: int
 @export var Bullet  : PackedScene
 
-
+@onready var camera: Camera2D = $Camera2D
 @onready var marker: Marker2D = $Marker2D
 @onready var sprite: AnimatedSprite2D = $Sprite as AnimatedSprite2D
 @onready var delay_timer: Timer = $Timer
