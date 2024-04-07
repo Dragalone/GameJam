@@ -239,47 +239,9 @@ texture_filter = 1
 texture = ExtResource("2_6f172")
 centered = false
 
-[node name="Spawn Points" type="Node" parent="."]
+[node name="Enemy2" parent="." instance=ExtResource("2_7ov0x")]
+position = Vector2(-187, 405)
 
-[node name="Marker2D" type="Marker2D" parent="Spawn Points"]
-position = Vector2(-915, 307)
-
-[node name="Marker2D2" type="Marker2D" parent="Spawn Points"]
-position = Vector2(-891, 999)
-
-[node name="Marker2D3" type="Marker2D" parent="Spawn Points"]
-position = Vector2(-454, 994)
-
-[node name="Marker2D4" type="Marker2D" parent="Spawn Points"]
-position = Vector2(472, 321)
-
-[node name="Marker2D5" type="Marker2D" parent="Spawn Points"]
-position = Vector2(-599, 312)
-
-[node name="Marker2D6" type="Marker2D" parent="Spawn Points"]
-position = Vector2(-879, 616)
-
-[node name="Marker2D7" type="Marker2D" parent="Spawn Points"]
-position = Vector2(422, 952)
-
-[node name="Marker2D8" type="Marker2D" parent="Spawn Points"]
-position = Vector2(53, 314)
-
-[node name="Marker2D9" type="Marker2D" parent="Spawn Points"]
-position = Vector2(-25, 540)
-
-[node name="WaveManager" type="Node" parent="." node_paths=PackedStringArray("spawn_points")]
-script = ExtResource("8_8om7t")
-enemy_list = Array[PackedScene]([ExtResource("2_7ov0x"), ExtResource("9_2ysuq")])
-spawn_rate = Array[float]([0.2, 0.8])
-spawn_points = [NodePath("../Spawn Points/Marker2D"), NodePath("../Spawn Points/Marker2D2"), NodePath("../Spawn Points/Marker2D3"), NodePath("../Spawn Points/Marker2D4"), NodePath("../Spawn Points/Marker2D5"), NodePath("../Spawn Points/Marker2D6"), NodePath("../Spawn Points/Marker2D7"), NodePath("../Spawn Points/Marker2D8"), NodePath("../Spawn Points/Marker2D9")]
-
-[node name="WaveTimeout" type="Timer" parent="WaveManager"]
-one_shot = true
-
-[node name="WaveCountdown" type="Timer" parent="WaveManager"]
-
-[connection signal="enemy_changed" from="EnemyManager" to="WaveManager" method="change_enemy"]
 [connection signal="filled_up" from="UI/DiskFillPanel" to="Player" method="_on_disk_fill_panel_filled_up"]
 [connection signal="enemiesLeftSet" from="WaveManager" to="UI/WavePanel" method="_on_wave_manager_enemies_left_set"]
 [connection signal="timeoutSet" from="WaveManager" to="UI/WavePanel" method="_on_wave_manager_timeout_set"]

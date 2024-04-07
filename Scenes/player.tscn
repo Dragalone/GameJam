@@ -106,5 +106,19 @@ animation = &"front"
 position = Vector2(-6, 11)
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.3
+wait_time = 0.5
 one_shot = true
+
+[node name="BoostingTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[node name="DamageBoostTimer" type="Timer" parent="."]
+
+[node name="TripleShotTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[connection signal="timeout" from="BoostingTimer" to="." method="_on_boosting_timer_timeout"]
+[connection signal="timeout" from="DamageBoostTimer" to="." method="_on_damage_boost_timer_timeout"]
+[connection signal="timeout" from="TripleShotTimer" to="." method="_on_triple_shot_timer_timeout"]
