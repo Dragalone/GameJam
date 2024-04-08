@@ -1,0 +1,54 @@
+[gd_scene load_steps=4 format=3 uid="uid://dqj0036jh0aon"]
+
+[ext_resource type="Script" path="res://Scenes/GameOverUI.gd" id="1_5ep5h"]
+[ext_resource type="Texture2D" uid="uid://djnplm7xfkam1" path="res://Assets/UI/game_over_screen.png" id="2_b3fgg"]
+[ext_resource type="PackedScene" uid="uid://b3qa6kdono8cy" path="res://Scenes/scene_transition.tscn" id="2_b46vk"]
+
+[node name="GameOver" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameOverUI" type="CanvasLayer" parent="."]
+script = ExtResource("1_5ep5h")
+
+[node name="TextureRect" type="TextureRect" parent="GameOverUI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_b3fgg")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameOverUI"]
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+
+[node name="Info" type="Label" parent="GameOverUI/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Игра окончена! Нажмите SPACE, чтобы выйти в главное меню
+"
+
+[node name="Points" type="Label" parent="GameOverUI/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Очки: 0"
+horizontal_alignment = 1
+
+[node name="SceneTransition" parent="." instance=ExtResource("2_b46vk")]
+layer = 0

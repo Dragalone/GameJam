@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://b5fe2teqpwa20" path="res://Assets/Animations/Enemies/Horse/horse_move2.png" id="6_t65s3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r3ohp"]
-size = Vector2(53, 48)
+size = Vector2(47, 40)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_iswhf"]
 animations = [{

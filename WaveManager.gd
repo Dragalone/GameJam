@@ -43,7 +43,6 @@ func _start_wave():
 	wave_fighting = true
 	
 	enemies_left = int(0.5 * wave * wave + 6)
-	
 	var enemies_to_spawn = enemies_left
 	while enemies_to_spawn > 0:
 		var rnd = randf_range(0,1)
@@ -53,7 +52,9 @@ func _start_wave():
 				var spawn_id = randi_range(0, len(spawn_points)-1)
 				enemy.position = spawn_points[spawn_id].position + Vector2(randf_range(0, 5), randf_range(0, 5))
 				get_node("../EnemyManager").add_child(enemy)
+				enemy.get_node("AttackArea/AttackAreaShape").disabled = true
 				await get_tree().create_timer(0.5).timeout
+				enemy.get_node("AttackArea/AttackAreaShape").disabled = false
 				enemies_to_spawn -= 1
 				if enemies_to_spawn == 0:
 					break

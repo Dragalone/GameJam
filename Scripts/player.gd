@@ -152,6 +152,8 @@ func _on_disk_fill_panel_filled_up():
 	gameOver = true
 	sprite.play()
 	sprite.animation = "dead"
+	await sprite.animation_finished
+	game_over.emit()
 
 
 func _on_boosting_timer_timeout():
