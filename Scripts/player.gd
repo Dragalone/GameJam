@@ -17,6 +17,12 @@ signal game_over
 @onready var damage_boost_timer: Timer = $DamageBoostTimer
 @onready var triple_shot_timer: Timer = $TripleShotTimer
 
+@onready var triple_shot_buff_indicator = $"../UI/DisplayBuffs/HBoxContainer/TripleShotDisplay"
+@onready var boosting_buff_indicator = $"../UI/DisplayBuffs/HBoxContainer/FireRateDisplay"
+@onready var damage_buff_indicator = $"../UI/DisplayBuffs/HBoxContainer/DamageBuffDisplay"
+
+
+
 var initial_delay_time: float
 
 @onready var disk_fill_bar: DiskFillPanel = $"../UI/DiskFillPanel"
@@ -150,11 +156,12 @@ func _on_disk_fill_panel_filled_up():
 
 func _on_boosting_timer_timeout():
 	delay_timer.wait_time = initial_delay_time
-
+	boosting_buff_indicator.visible = false
 
 func _on_damage_boost_timer_timeout():
 	damage = initial_damage
-
+	damage_buff_indicator.visible = false
 
 func _on_triple_shot_timer_timeout():
 	is_triple_shot_active = false
+	triple_shot_buff_indicator.visible = false

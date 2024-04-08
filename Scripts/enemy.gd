@@ -11,6 +11,7 @@ var health: int
 var speed: float
 var damage: int
 var player: Player = null
+var score: int
 
 var chase = false
 var canDamage: bool = false
@@ -20,22 +21,35 @@ var cooldown: bool = false
 @onready var damage_numbers_origin = $DamageNumbersOrigin
 @onready var navigation_agent = $Navigation/NavigationAgent2D
 
+@onready var score_path: Label = $"../../UI/WavePanel/Background/MarginContainer/VBoxContainer/Score"
+
 var enemyManager: EnemyManager
+
+
+
+@onready var collectables_node = get_tree().get_root().get_node("Main/Collectables")
 
 signal enemy_changed(count: int)
 
 func _ready():
+	score = 50
 	health = 120
 	speed = 1.5
 	damage = 1
 	enemyManager = get_parent()
 	enemy_changed.connect(enemyManager.change_enemies)
 
+
+func death():
+	enemy_changed.emit(-1)
+	random_buff_spawn()
+	ScoreManager.total_score += score
+	score_path.text = "Очки: " + str(ScoreManager.total_score)
+	queue_free()
+
 func _physics_process(_delta):
 	if (health <= 0):
-		enemy_changed.emit(-1)
-		random_buff_spawn()
-		queue_free()
+		death()
 		
 	if chase:
 		var direction = Vector2.ZERO
@@ -53,19 +67,19 @@ func random_buff_spawn():
 			match  buff_type:
 				0: 
 					var healling_buff = HealingBuff.instantiate()
-					get_tree().root.add_child(healling_buff)
+					collectables_node.add_child(healling_buff)
 					healling_buff.global_position = global_position
 				1:
 					var boosting_buff = BoostingBuff.instantiate()
-					get_tree().root.add_child(boosting_buff)
+					collectables_node.add_child(boosting_buff)
 					boosting_buff.global_position = global_position
 				2:
 					var damage_buff = DamageBuff.instantiate()
-					get_tree().root.add_child(damage_buff)
+					collectables_node.add_child(damage_buff)
 					damage_buff.global_position = global_position
 				3:
 					var triple_shot_buff = TripleShotBuff.instantiate()
-					get_tree().root.add_child(triple_shot_buff)
+					collectables_node.add_child(triple_shot_buff)
 					triple_shot_buff.global_position = global_position
 
 func _on_detection_area_body_entered(body):
@@ -101,8 +115,12 @@ func _on_delay_attack_timer_timeout():
 	sprite.play()
 
 
+func play_sound():
+	$"../../Sounds/Eating".play()
+
 func _on_sprite_animation_finished():
 	player.fill_disk_space(damage)
+	play_sound()
 	sprite.stop()
 	attackDelay.start()
 
