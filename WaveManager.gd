@@ -14,7 +14,7 @@ signal timeoutSet(seconds: int)
 signal enemiesLeftSet(enemies: int)
 
 var wave: int = 0 : set = _set_wave
-var timeout_value = 10
+var timeout_value = 5
 var enemies_left: int = 0
 var timeout: bool = false
 var wave_fighting: bool = false
@@ -41,7 +41,9 @@ func change_enemy(count: int):
 
 func _start_wave():
 	wave_fighting = true
-	enemies_left = int(0.5 * wave * wave + 3)
+	
+	enemies_left = int(0.5 * wave * wave + 6)
+	
 	var enemies_to_spawn = enemies_left
 	while enemies_to_spawn > 0:
 		var rnd = randf_range(0,1)
